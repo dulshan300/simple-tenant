@@ -1,6 +1,6 @@
 <?php
 
-
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
 if (!function_exists('makeTenantDB')) {
@@ -9,6 +9,10 @@ if (!function_exists('makeTenantDB')) {
         $db_name = env('TENANT_PREFIX') . "_" . $id;
         $query = "CREATE DATABASE {$db_name}";
         DB::statement($query);
+
+        setTenant($id);
+
+        Artisan::call('migrate');
     }
 }
 
@@ -37,13 +41,13 @@ if (!function_exists('tenant')) {
 
 if (!function_exists('setTenant')) {
 
-    function setTenant($tenent = false)
+    function setTenant($tenent_id = false)
     {
         if (auth()->check()) {
-            $user = $tenent ? $tenent : auth()->user();
+            $tenent_id = $tenent_id ? $tenent_id : auth()->id();
             // change tenant
             DB::purge('mysql');
-            $db_name = env('TENANT_PREFIX') . "_" . $user->tenant_id;
+            $db_name = env('TENANT_PREFIX') . "_" . $tenent_id;
             config(['database.connections.mysql.database' => $db_name]);
         }
     }
