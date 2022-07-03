@@ -11,8 +11,8 @@ if (!function_exists('makeTenantDB')) {
         DB::statement($query);
 
         setTenant($id);
-
         Artisan::call('migrate');
+        unsetTenant();
     }
 }
 
@@ -50,5 +50,14 @@ if (!function_exists('setTenant')) {
             $db_name = env('TENANT_PREFIX') . "_" . $tenent_id;
             config(['database.connections.mysql.database' => $db_name]);
         }
+    }
+}
+
+if (!function_exists('unsetTenant')) {
+
+    function unsetTenant()
+    {
+        DB::purge('mysql');
+        config(['database.connections.mysql.database' => env('DB_DATABASE')]);
     }
 }
