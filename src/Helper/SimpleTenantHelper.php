@@ -1,7 +1,6 @@
 <?php
 
-use App\Models\User;
-use Illuminate\Support\Facades\Artisan;
+
 use Illuminate\Support\Facades\DB;
 
 if (!function_exists('makeTenantDB')) {
