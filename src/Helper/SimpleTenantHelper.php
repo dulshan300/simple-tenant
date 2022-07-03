@@ -24,17 +24,15 @@ if (!function_exists('tenant')) {
             $user = $tenent ? $tenent : auth()->user();
 
             $bd_prime = config('database.connections.mysql.database');
-            // change tenant
-            DB::purge('mysql');
+            // change tenant           
             $db_name = env('TENANT_PREFIX') . "_" . $user->tenant_id;
             config(['database.connections.mysql.database' => $db_name]);
-
+            DB::reconnect('mysql');
             // execute
             $clouser();
 
-
-            DB::purge('mysql');
             config(['database.connections.mysql.database' => $bd_prime]);
+            DB::reconnect('mysql');
         }
     }
 }
@@ -46,10 +44,10 @@ if (!function_exists('setTenant')) {
         if (auth()->check()) {
             $tenent_id = $tenent_id ? $tenent_id : auth()->id();
             // change tenant
-            session(['dbname'=>config('database.connections.mysql.database')]);
-            DB::purge('mysql');
+            session(['dbname' => config('database.connections.mysql.database')]);
             $db_name = env('TENANT_PREFIX') . "_" . $tenent_id;
             config(['database.connections.mysql.database' => $db_name]);
+            DB::reconnect('mysql');
         }
     }
 }
@@ -58,7 +56,7 @@ if (!function_exists('unsetTenant')) {
 
     function unsetTenant()
     {
-        DB::purge('mysql');
         config(['database.connections.mysql.database' => session('dbname')]);
+        DB::reconnect('mysql');
     }
 }
