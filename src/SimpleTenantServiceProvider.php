@@ -10,7 +10,7 @@ class SimpleTenantServiceProvider extends ServiceProvider
     {
         include(__DIR__."/Helper/SimpleTenantHelper.php");
         
-        $this->loadRoutesFrom(__DIR__ . '/routes.php');
+        // $this->loadRoutesFrom(__DIR__ . '/routes.php');
 
         
     }
