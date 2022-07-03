@@ -8,7 +8,8 @@ if (!function_exists('makeTenantDB')) {
     function makeTenantDB($id)
     {
         $db_name = env('TENANT_PREFIX') . "_" . $id;
-        Artisan::call('make:database ' . $db_name); # code...
+        $query = "CREATE DATABASE {$db_name}";
+        DB::statement($query);
     }
 }
 

@@ -1,12 +1,11 @@
 {
     "name": "dulshan/simple-tenant",
-    "description": "Simple Tenant Management Script",
+    "description": "Simple Multipal Database Tenant Wrapper for Laravel 8/9",
     "type": "library",
     "autoload": {
         "psr-4": {
             "Dulshan\\SimpleTenant\\": "src/"
         }
-       
     },
     "authors": [
         {
@@ -15,7 +14,11 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {},
+    "license": "MIT",
+    "require": {
+        "php": ">=8.0.0",
+        "laravel/framework": "^8.0"
+    },
     "extra": {
         "laravel": {
             "providers": [
