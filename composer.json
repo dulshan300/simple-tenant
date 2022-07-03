@@ -1,0 +1,26 @@
+{
+    "name": "dulshan/simple-tenant",
+    "description": "Simple Tenant Management Script",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Dulshan\\SimpleTenant\\": "src/"
+        }
+       
+    },
+    "authors": [
+        {
+            "name": "Dulshan",
+            "email": "abavira@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Dulshan\\SimpleTenant\\SimpleTenantServiceProvider"
+            ]
+        }
+    }
+}
