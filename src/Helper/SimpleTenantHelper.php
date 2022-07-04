@@ -42,7 +42,7 @@ if (!function_exists('setTenant')) {
     function setTenant($tenent_id = false)
     {
         if (auth()->check()) {
-            $tenent_id = $tenent_id ? $tenent_id : auth()->id();
+            $tenent_id = $tenent_id ? $tenent_id : auth()->user()->tenant_id;
             // change tenant
             session(['dbname' => config('database.connections.mysql.database')]);
             $db_name = env('TENANT_PREFIX') . "_" . $tenent_id;
