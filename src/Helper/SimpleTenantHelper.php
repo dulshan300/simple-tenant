@@ -11,6 +11,7 @@ if (!function_exists('makeTenantDB')) {
         DB::statement($query);
 
         setTenant($id);
+        DB::purge();
         Artisan::call('migrate');
         unsetTenant();
     }
