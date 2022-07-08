@@ -44,7 +44,7 @@ if (!function_exists('setTenant')) {
         if (auth()->check()) {
             $tenent_id = $tenent_id ? $tenent_id : auth()->user()->tenant_id;
             // change tenant
-            session(['dbname' => config('database.connections.mysql.database')]);
+            // session(['dbname' => config('database.connections.mysql.database')]);
             $db_name = env('TENANT_PREFIX') . "_" . $tenent_id;
             config(['database.connections.mysql.database' => $db_name]);
             DB::reconnect('mysql');
@@ -56,7 +56,7 @@ if (!function_exists('unsetTenant')) {
 
     function unsetTenant()
     {
-        config(['database.connections.mysql.database' => session('dbname')]);
+        config(['database.connections.mysql.database' => env('DB_DATABASE')]);
         DB::reconnect('mysql');
     }
 }
